@@ -5,6 +5,7 @@ const Joi = require('joi');
 
 const app = express();
 
+// Настройка Multer для сохранения изображений
 const storage = multer.diskStorage({
   destination: './uploads/',
   filename: (req, file, cb) => {
@@ -12,6 +13,7 @@ const storage = multer.diskStorage({
   }
 });
 
+// Схема для валидации файла
 const fileSchema = Joi.object({
   fieldname: Joi.string().required(),
   originalname: Joi.string().required(),
@@ -23,6 +25,7 @@ const fileSchema = Joi.object({
   path: Joi.string().required(),
 });
 
+// Функция валидации размера и типа файла
 const fileFilter = (req, file, cb) => {
   const validationResult = fileSchema.validate(file);
 
@@ -41,6 +44,7 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
+// Инициализация Multer
 const upload = multer({
   storage: storage,
   limits: { fileSize: 1000000 }, // Максимальный размер файла: 1MB
@@ -49,17 +53,19 @@ const upload = multer({
   }
 }).single('image');
 
+// Маршрут для загрузки изображений
 app.post('/upload', (req, res) => {
   upload(req, res, (err) => {
     if (err) {
       res.status(400).json({ error: err });
     } else {
-      const imageUrl = `http://localhost:3000/uploads/${req.file.filename}`;
+      const imageUrl = `http://localhost:3000/uploads/${req.file.filename}`;//Формирование ссылки
       res.status(200).json({ imageUrl });
     }
   });
 });
 
+// Статический роутинг для доступа к загруженным изображениям
 app.use('/uploads', express.static('uploads'));
 
 const PORT = process.env.PORT || 3000;
