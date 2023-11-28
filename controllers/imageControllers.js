@@ -32,7 +32,8 @@ const uploadImage = (req, res) => {
 
 const getImage = (req, res) => {
   const { folder, filename } = req.params;
-  const imagePath = path.join(imagesPath, folder, filename);
+  const parentDir = path.dirname(__dirname);
+  const imagePath = path.join(parentDir, imagesPath, folder, filename);
   console.log(imagePath)
   if (fs.existsSync(imagePath)) {
     res.sendFile(imagePath);
