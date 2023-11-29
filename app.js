@@ -7,7 +7,8 @@ const helmet = require('helmet');
 const cors = require('cors');
 
 const rateLimiter = require('./middlewares/rateLimit');
-const { requestLogger, errorLogger } = require('./middlewares/logger');
+//на период разработки отключено логирование
+//const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/errorHandler');
 const router = require('./routes/index');
 
