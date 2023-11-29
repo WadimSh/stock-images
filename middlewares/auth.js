@@ -1,7 +1,7 @@
 const Unauthorized = require("../errors/Unauthorized");
 const { TOKEN } = require("../utils/constants");
 
-//временное решение по разграничению прав, дальше будет дорабатываться
+// Временное решение по разграничению прав, дальше будет дорабатываться
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
 

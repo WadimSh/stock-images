@@ -3,7 +3,7 @@ const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 
 const { IMAGE_PATH } = require("../utils/constants");
-const { maxSize } = require("../utils/imageUtils");
+const { imageUrl, maxSize } = require("../utils/imageUtils");
 const BadRequest = require("../errors/BadRequest");
 const NotFound = require("../errors/NotFound");
 
@@ -33,7 +33,8 @@ const uploadImage = (req, res, next) => {
       next(new NotFound('Не удалось загрузить изображение'));
       return;
     }
-    res.status(200).json(`http://localhost:3000/image/${folder}/${filename}`);
+    const url = imageUrl(folder, filename);
+    res.status(200).json({ url });
   });
 };
 
@@ -67,7 +68,7 @@ const getAllImageUrls = (req, res, next) => {
 
   fs.promises.readdir(folderPath)
     .then(imageFiles => {
-      const imageUrls = imageFiles.map(file => `http://localhost:3000/image/${folder}/${file}`);
+      const imageUrls = imageFiles.map(file => imageUrl(folder, file));
       res.status(200).json({ imageUrls });
     })
     .catch((err) => {

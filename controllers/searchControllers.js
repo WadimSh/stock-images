@@ -1,6 +1,7 @@
 const path = require("path");
 
 const { IMAGE_PATH } = require("../utils/constants");
+const { imageUrl } = require("../utils/imageUtils");
 const { findByName } = require("../utils/searchUtils");
 const NotFound = require("../errors/NotFound");
 
@@ -12,7 +13,7 @@ const searchImages = (req, res, next) => {
   findByName(folderPath, query)
     .then((files) => {
       if (files && files.length > 0) {
-        const searchFiles = files.map(file => `http://localhost:3000/image/${folder}/${file}`);
+        const searchFiles = files.map(file => imageUrl(folder, file));
         res.status(200).json({ searchFiles });
       } else {
         throw new NotFound('Файл не найден');
