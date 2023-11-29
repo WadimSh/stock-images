@@ -1,4 +1,5 @@
 const imageRouter = require('express').Router();
+
 const imageController = require("../controllers/imageControllers");
 
 imageRouter.post("/:folder", imageController.uploadImage);

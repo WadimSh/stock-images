@@ -8,6 +8,7 @@ const searchImages = (req, res, next) => {
   const { folder } = req.params;
   const folderPath = path.join(IMAGE_PATH, folder);
   const query = req.query.files;
+  
   findByName(folderPath, query)
     .then((files) => {
       if (files && files.length > 0) {

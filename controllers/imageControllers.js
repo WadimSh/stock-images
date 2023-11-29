@@ -17,7 +17,6 @@ const uploadImage = (req, res, next) => {
 
   const image = req.files.image;
   const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
-
   if (!allowedTypes.includes(image.mimetype)) {
     next(new BadRequest('Недопустимый тип файла'));
     return;

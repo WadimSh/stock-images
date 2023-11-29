@@ -1,5 +1,4 @@
 const fs = require("fs");
-const path = require("path");
 
 const { IMAGE_PATH } = require("./constants");
 
