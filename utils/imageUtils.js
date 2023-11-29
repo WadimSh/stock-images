@@ -1,18 +1,16 @@
 const fs = require("fs");
 const path = require("path");
 
-// Путь к папке images
-const imagesPath = "./images";
+const { IMAGE_PATH } = require("./constants");
 
 // Максимальный размер файла (в данном случае 1MB)
 const maxSize = 1 * 1024 * 1024;
 
 // Создаем папку images, если она не существует
-if (!fs.existsSync(imagesPath)) {
-  fs.mkdirSync(imagesPath);
+if (!fs.existsSync(IMAGE_PATH)) {
+  fs.mkdirSync(IMAGE_PATH);
 }
 
 module.exports = {
-  imagesPath,
   maxSize,
 };

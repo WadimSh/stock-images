@@ -1,6 +1,5 @@
 const Unauthorized = require("../errors/Unauthorized");
-
-const payload = "thisismysecrctekeyfhrgfgrfrty84fwir767";
+const { TOKEN } = require("../utils/constants");
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
@@ -12,7 +11,7 @@ module.exports = (req, res, next) => {
 
   const token = authorization.replace('Bearer ', '');
 
-  if (token === payload) {
+  if (token === TOKEN) {
     next();
   } else {
     next(new Unauthorized('Недействительная авторизация'));

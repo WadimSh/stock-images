@@ -1,13 +1,13 @@
 const fs = require("fs");
 const path = require("path");
 
-const { imagesPath } = require("../utils/imageUtils");
+const { IMAGE_PATH } = require("../utils/constants");
 const BadRequest = require("../errors/BadRequest");
 const NotFound = require("../errors/NotFound");
 
 const createFolder = (req, res) => {
   const folderName = req.body.folderName;
-  const folderPath = path.join(imagesPath, folderName);
+  const folderPath = path.join(IMAGE_PATH, folderName);
 
   if (fs.existsSync(folderPath)) {
     throw new BadRequest('Папка уже существует');
@@ -19,7 +19,7 @@ const createFolder = (req, res) => {
 
 const deleteFolder = (req, res, next) => {
   const { folder } = req.params;
-  const folderPath = path.join(imagesPath, folder);
+  const folderPath = path.join(IMAGE_PATH, folder);
 
   fs.promises.access(folderPath)
     .then(() => {
@@ -37,7 +37,7 @@ const deleteFolder = (req, res, next) => {
 };
 
 const getAllFolders = (req, res, next) => {
-  fs.promises.readdir(imagesPath, { withFileTypes: true })
+  fs.promises.readdir(IMAGE_PATH, { withFileTypes: true })
     .then(files => {
       const folders = files
         .filter(file => file.isDirectory())

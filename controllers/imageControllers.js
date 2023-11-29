@@ -2,7 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 
-const { imagesPath, maxSize } = require("../utils/imageUtils");
+const { IMAGE_PATH } = require("../utils/constants");
+const { maxSize } = require("../utils/imageUtils");
 const BadRequest = require("../errors/BadRequest");
 const NotFound = require("../errors/NotFound");
 
@@ -28,20 +29,20 @@ const uploadImage = (req, res, next) => {
   }
 
   const filename = `${uuidv4()}-${image.name}`;
-  image.mv(path.join(imagesPath, folder, filename), (err) => {
+  image.mv(path.join(IMAGE_PATH, folder, filename), (err) => {
     if (err) {
       next(new NotFound('Не удалось загрузить изображение'));
       return;
     }
-    res.json({ folder, filename });
+    res.status(200).json(`http://localhost:3000/image/${folder}/${filename}`);
   });
 };
 
 const getImage = (req, res) => {
   const { folder, filename } = req.params;
   const parentDir = path.dirname(__dirname);
-  const imagePath = path.join(parentDir, imagesPath, folder, filename);
-  console.log(imagePath)
+  const imagePath = path.join(parentDir, IMAGE_PATH, folder, filename);
+  
   if (fs.existsSync(imagePath)) {
     res.sendFile(imagePath);
   } else {
@@ -51,7 +52,7 @@ const getImage = (req, res) => {
 
 const deleteImage = (req, res) => {
   const { folder, filename } = req.params;
-  const imagePath = path.join(imagesPath, folder, filename);
+  const imagePath = path.join(IMAGE_PATH, folder, filename);
 
   if (fs.existsSync(imagePath)) {
     fs.unlinkSync(imagePath);
@@ -63,7 +64,7 @@ const deleteImage = (req, res) => {
 
 const getAllImageUrls = (req, res, next) => {
   const { folder } = req.params;
-  const folderPath = path.join(imagesPath, folder);
+  const folderPath = path.join(IMAGE_PATH, folder);
 
   fs.promises.readdir(folderPath)
     .then(imageFiles => {
