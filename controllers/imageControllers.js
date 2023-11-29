@@ -24,7 +24,7 @@ const uploadImage = (req, res) => {
   const filename = `${uuidv4()}-${image.name}`;
   image.mv(path.join(imagesPath, folder, filename), (err) => {
     if (err) {
-      return res.status(500).json({ error: "Failed to upload image" });
+      return res.status(404).json({ error: "Failed to upload image" });
     }
     res.json({ folder, filename });
   });
@@ -54,7 +54,7 @@ const deleteImage = (req, res) => {
   }
 };
 
-const getAllImageUrls = (req, res) => {
+const getAllImageUrls = (req, res, next) => {
   const { folder } = req.params;
   const folderPath = path.join(imagesPath, folder);
 
@@ -64,9 +64,9 @@ const getAllImageUrls = (req, res) => {
       res.status(200).json({ imageUrls });
     })
     .catch(error => {
-      console.error(error);
-      res.status(500).json({ error: 'Failed to fetch imageUrls' });
-    });
+      res.status(404).json({ error: 'Failed to fetch imageUrls' });
+    })
+    .catch(next);
 };
 
 module.exports = {

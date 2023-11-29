@@ -14,13 +14,13 @@ const createFolder = (req, res) => {
   }
 };
 
-const deleteFolder = (req, res) => {
+const deleteFolder = (req, res, next) => {
   const { folder } = req.params;
   const folderPath = path.join(imagesPath, folder);
 
   fs.promises.access(folderPath)
     .then(() => {
-      return fs.promises.rmdir(folderPath, { recursive: true });
+      return fs.promises.rm(folderPath, { recursive: true });
     })
     .then(() => {
       res.status(200).json({ message: 'Folder deleted successfully' });
@@ -28,17 +28,23 @@ const deleteFolder = (req, res) => {
     .catch((err) => {
       if (err.code === 'ENOENT') {
         res.status(404).json({ message: 'Folder does not exist' });
-      } else {
-        res.status(500).json({ message: 'Error deleting folder' });
-      }
-    });
+      } 
+    })
+    .catch(next);
 };
 
-const getAllFolders = (req, res) => {
-  const folders = fs.readdirSync(imagesPath, { withFileTypes: true })
-    .filter(dirent => dirent.isDirectory())
-    .map(dirent => dirent.name);
-  res.status(200).json({ folders });
+const getAllFolders = (req, res, next) => {
+  fs.promises.readdir(imagesPath, { withFileTypes: true })
+    .then(files => {
+      const folders = files
+        .filter(file => file.isDirectory())
+        .map(file => file.name);
+      res.status(200).json({ folders });
+    })
+    .catch(error => {
+      res.status(404).json({ error: "Failed to retrieve folders" });
+    })
+    .catch(next);
 };
 
 module.exports = {

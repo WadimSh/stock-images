@@ -3,21 +3,17 @@ const fileUpload = require("express-fileupload");
 const path = require("path");
 
 const router = require('./routes/index');
-
+const { PORT = 3000 } = process.env;
 const app = express();
 
 app.use(fileUpload());
 app.use(express.json());
 
-app.use(router);
-
-
-//возвращает форму загрузки изображений
+//возвращает форму загрузки изображений (временная функциональность)
 app.get("/", (_, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// Запуск сервера
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
-});
+app.use(router);
+
+app.listen(PORT);

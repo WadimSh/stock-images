@@ -10,4 +10,8 @@ router.use('/search', searchRouter);
 
 router.use('/folder', auth, folderRouter);
 
+router.use('*', auth, (req, res, next) => {
+  res.status(404).json({ error: 'Not Found' });
+});
+
 module.exports = router;
