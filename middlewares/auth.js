@@ -1,10 +1,13 @@
+const Unauthorized = require("../errors/Unauthorized");
+
 const payload = "thisismysecrctekeyfhrgfgrfrty84fwir767";
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
-    return res.status(401).json({ error: "Invalid authorization" });
+    next(new Unauthorized('Недействительная авторизация'));
+    return;
   }
 
   const token = authorization.replace('Bearer ', '');
@@ -12,6 +15,7 @@ module.exports = (req, res, next) => {
   if (token === payload) {
     next();
   } else {
-    return res.status(401).json({ error: "Invalid authorization" });
+    next(new Unauthorized('Недействительная авторизация'));
+    return;
   }
 };

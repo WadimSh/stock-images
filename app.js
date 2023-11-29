@@ -17,7 +17,7 @@ const app = express();
 
 app.use(cors());
 
-app.use(requestLogger);
+//app.use(requestLogger);
 
 app.use(rateLimiter);
 
@@ -34,7 +34,7 @@ app.get("/", (_, res) => {
 
 app.use(router);
 
-app.use(errorLogger);
+//app.use(errorLogger);
 
 app.use(errors());
 

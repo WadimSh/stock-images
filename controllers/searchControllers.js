@@ -1,6 +1,8 @@
 const path = require("path");
+
 const { imagesPath } = require("../utils/imageUtils");
 const { findByName } = require("../utils/searchUtils");
+const NotFound = require("../errors/NotFound");
 
 const searchImages = (req, res, next) => {
   const { folder } = req.params;
@@ -11,7 +13,7 @@ const searchImages = (req, res, next) => {
       if (files && files.length > 0) {
         res.send(files);
       } else {
-        res.status(404).send("File not found.");
+        throw new NotFound('Файл не найден');
       }
     })
     .catch(next);

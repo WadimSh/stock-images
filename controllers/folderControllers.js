@@ -1,16 +1,19 @@
 const fs = require("fs");
 const path = require("path");
+
 const { imagesPath } = require("../utils/imageUtils");
+const BadRequest = require("../errors/BadRequest");
+const NotFound = require("../errors/NotFound");
 
 const createFolder = (req, res) => {
   const folderName = req.body.folderName;
   const folderPath = path.join(imagesPath, folderName);
 
   if (fs.existsSync(folderPath)) {
-    res.status(400).json({ message: 'Folder already exists' });
+    throw new BadRequest('Папка уже существует');
   } else {
     fs.mkdirSync(folderPath);
-    res.status(200).json({ message: 'Folder created successfully' });
+    res.status(200).json({ message: 'Папка успешно создана' });
   }
 };
 
@@ -23,11 +26,11 @@ const deleteFolder = (req, res, next) => {
       return fs.promises.rm(folderPath, { recursive: true });
     })
     .then(() => {
-      res.status(200).json({ message: 'Folder deleted successfully' });
+      res.status(200).json({ message: 'Папка успешно удалена' });
     })
     .catch((err) => {
       if (err.code === 'ENOENT') {
-        res.status(404).json({ message: 'Folder does not exist' });
+        throw new NotFound('Папка не существует');
       } 
     })
     .catch(next);
@@ -41,8 +44,8 @@ const getAllFolders = (req, res, next) => {
         .map(file => file.name);
       res.status(200).json({ folders });
     })
-    .catch(error => {
-      res.status(404).json({ error: "Failed to retrieve folders" });
+    .catch((err) => {
+      throw new NotFound('Не удалось получить папки');
     })
     .catch(next);
 };
