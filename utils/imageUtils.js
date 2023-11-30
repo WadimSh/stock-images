@@ -4,7 +4,7 @@ const { IMAGE_PATH, BASE_URL } = require("./constants");
 
 // Формируем ссылку на файл изображения
 const imageUrl = (folder, filename) => {
-  return `${BASE_URL}/image/${folder}/${filename}`;
+  return `${BASE_URL}/images/${folder}/${filename}`;
 };
 
 // Максимальный размер файла (в данном случае 1MB)
