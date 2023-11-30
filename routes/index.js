@@ -6,11 +6,11 @@ const imageRouter = require('./imageRouters');
 const searchRouter = require('./searchRouters');
 const NotFound = require('../errors/NotFound');
 
-router.use('/image', imageRouter);
+router.use('/images', imageRouter);
 
 router.use('/search', searchRouter);
 
-router.use('/folder', auth, folderRouter);
+router.use('/folders', auth, folderRouter);
 
 router.use('*', auth, (req, res, next) => {
   next(new NotFound('Страница с таким url не найдена'));
