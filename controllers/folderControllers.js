@@ -2,19 +2,14 @@ const fs = require("fs");
 const path = require("path");
 
 const { IMAGE_PATH } = require("../utils/constants");
-const BadRequest = require("../errors/BadRequest");
+const { generateFolder } = require("../utils/generateFolder");
 const NotFound = require("../errors/NotFound");
 
 const createFolder = (req, res) => {
-  const folderName = req.body.folderName;
+  const folderName = generateFolder();
   const folderPath = path.join(IMAGE_PATH, folderName);
-
-  if (fs.existsSync(folderPath)) {
-    throw new BadRequest('Папка уже существует');
-  } else {
-    fs.mkdirSync(folderPath);
-    res.status(200).json({ message: 'Папка успешно создана' });
-  }
+  fs.mkdirSync(folderPath);
+  res.status(200).json({ message: 'Папка успешно создана', folderName });
 };
 
 const deleteFolder = (req, res, next) => {
@@ -30,7 +25,7 @@ const deleteFolder = (req, res, next) => {
     })
     .catch((err) => {
       if (err.code === 'ENOENT') {
-        throw new NotFound('Папка не существует');
+        throw new NotFound('Папки не существует');
       } 
     })
     .catch(next);

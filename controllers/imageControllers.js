@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const { v4: uuidv4 } = require("uuid");
 
 const { IMAGE_PATH } = require("../utils/constants");
 const { imageUrl, maxSize } = require("../utils/imageUtils");
@@ -27,13 +26,19 @@ const uploadImage = (req, res, next) => {
     return;
   }
 
-  const filename = `${uuidv4()}-${image.name}`;
-  image.mv(path.join(IMAGE_PATH, folder, filename), (err) => {
+  const imagePath = path.join(IMAGE_PATH, folder, image.name);
+
+  if (fs.existsSync(imagePath)) {
+    next(new BadRequest('Файл с таким именем уже существует'));
+    return;
+  }
+
+  image.mv(imagePath, (err) => {
     if (err) {
       next(new NotFound('Не удалось загрузить изображение'));
       return;
     }
-    const url = imageUrl(folder, filename);
+    const url = imageUrl(folder, image.name);
     res.status(200).json({ url });
   });
 };
