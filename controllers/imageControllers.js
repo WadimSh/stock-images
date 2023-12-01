@@ -39,7 +39,7 @@ const uploadImage = (req, res, next) => {
       return;
     }
     const url = imageUrl(folder, image.name);
-    res.status(200).json({ url });
+    res.status(200).json({ url, size: image.size, name: image.name });
   });
 };
 
@@ -49,7 +49,14 @@ const getImage = (req, res) => {
   const imagePath = path.join(parentDir, IMAGE_PATH, folder, filename);
   
   if (fs.existsSync(imagePath)) {
-    res.sendFile(imagePath);
+    const stats = fs.statSync(imagePath);
+    const options = {
+      headers: {
+        'Content-Length': stats.size,
+        'Content-Disposition': `inline; filename=${filename}`,
+      },
+    };
+    res.sendFile(imagePath, options);
   } else {
     throw new NotFound('Изображение не найдено');
   }
@@ -61,7 +68,7 @@ const deleteImage = (req, res) => {
 
   if (fs.existsSync(imagePath)) {
     fs.unlinkSync(imagePath);
-    res.sendStatus(200);
+    res.status(200).json({ message: `Файл ${filename} успешно удален` });
   } else {
     throw new NotFound('Изображение не найдено');
   }
@@ -73,8 +80,18 @@ const getAllImageUrls = (req, res, next) => {
 
   fs.promises.readdir(folderPath)
     .then(imageFiles => {
-      const imageUrls = imageFiles.map(file => imageUrl(folder, file));
-      res.status(200).json({ imageUrls });
+      const imageInfoPromises = imageFiles.map((file) => {
+        const filePath = path.join(folderPath, file);
+        return fs.promises.stat(filePath).then((stats) => ({
+          url: imageUrl(folder, file),
+          size: stats.size,
+          name: file,
+        }));
+      });
+      return Promise.all(imageInfoPromises);
+    })
+    .then(imageInfos => {
+      res.status(200).json({ imageInfos });
     })
     .catch((err) => {
       throw new NotFound('Не удалось получить url');

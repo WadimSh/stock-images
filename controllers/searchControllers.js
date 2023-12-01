@@ -1,3 +1,4 @@
+const fs = require("fs");
 const path = require("path");
 
 const { IMAGE_PATH } = require("../utils/constants");
@@ -13,11 +14,23 @@ const searchImages = (req, res, next) => {
   findByName(folderPath, query)
     .then((files) => {
       if (files && files.length > 0) {
-        const searchFiles = files.map(file => imageUrl(folder, file));
-        res.status(200).json({ searchFiles });
+        const searchFilesPromises = files.map(file => {
+          const filePath = path.join(folderPath, file);
+
+          return fs.promises.stat(filePath).then((stats) => ({
+            url: imageUrl(folder, file),
+            size: stats.size,
+            name: file,
+          }));
+        });
+
+        return Promise.all(searchFilesPromises);
       } else {
         throw new NotFound('Файл не найден');
       }
+    })
+    .then((searchFiles) => {
+      res.status(200).json({ searchFiles });
     })
     .catch(next);
 };

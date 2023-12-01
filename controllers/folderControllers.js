@@ -9,7 +9,7 @@ const createFolder = (req, res) => {
   const folderName = generateFolder();
   const folderPath = path.join(IMAGE_PATH, folderName);
   fs.mkdirSync(folderPath);
-  res.status(200).json({ message: 'Папка успешно создана', folderName });
+  res.status(200).json({ message: 'Папка успешно создана', folder: folderName });
 };
 
 const deleteFolder = (req, res, next) => {
@@ -21,7 +21,7 @@ const deleteFolder = (req, res, next) => {
       return fs.promises.rm(folderPath, { recursive: true });
     })
     .then(() => {
-      res.status(200).json({ message: 'Папка успешно удалена' });
+      res.status(200).json({ message: `Папка ${folder} успешно удалена` });
     })
     .catch((err) => {
       if (err.code === 'ENOENT') {
