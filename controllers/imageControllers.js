@@ -27,7 +27,6 @@ const uploadImage = (req, res, next) => {
   }
 
   const imagePath = path.join(IMAGE_PATH, folder, image.name);
-
   if (fs.existsSync(imagePath)) {
     next(new BadRequest('Файл с таким именем уже существует'));
     return;
