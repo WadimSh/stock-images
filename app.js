@@ -2,11 +2,12 @@ require('dotenv').config();
 
 const express = require("express");
 const fileUpload = require("express-fileupload");
-const path = require("path");
-
-const { errors } = require('celebrate');
-const helmet = require('helmet');
 const cors = require('cors');
+const helmet = require('helmet');
+const { errors } = require('celebrate');
+
+//под временную функциональность для разработки
+const path = require("path");
 
 const rateLimiter = require('./middlewares/rateLimit');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
