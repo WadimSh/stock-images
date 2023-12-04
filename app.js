@@ -9,8 +9,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 
 const rateLimiter = require('./middlewares/rateLimit');
-//на период разработки отключено логирование
-//const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/errorHandler');
 const router = require('./routes/index');
 
@@ -20,7 +19,7 @@ const app = express();
 
 app.use(cors());
 
-//app.use(requestLogger);
+app.use(requestLogger);
 
 app.use(rateLimiter);
 
@@ -30,14 +29,14 @@ app.use(fileUpload());
 
 app.use(express.json());
 
-//возвращает форму загрузки изображений (временная функциональность)
+//возвращает форму загрузки изображений (временная функциональность для разработки)
 app.get("/", (_, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.use(router);
 
-//app.use(errorLogger);
+app.use(errorLogger);
 
 app.use(errors());
 
