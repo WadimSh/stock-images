@@ -1,5 +1,5 @@
 const Unauthorized = require("../errors/Unauthorized");
-const { TOKEN } = require("../utils/constants");
+const { TOKEN_SECRET } = process.env;
 
 // Временное решение по разграничению прав, дальше будет дорабатываться
 module.exports = (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
   }
 
   const token = authorization.replace('Bearer ', '');
-  if (token === TOKEN) {
+  if (token === TOKEN_SECRET) {
     next();
   } else {
     next(new Unauthorized('Недействительная авторизация'));

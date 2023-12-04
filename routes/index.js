@@ -13,7 +13,7 @@ router.use('/search', searchRouter);
 router.use('/folders', auth, folderRouter);
 
 router.use('*', auth, (req, res, next) => {
-  next(new NotFound('Страница с таким url не найдена'));
+  next(new NotFound('Такого url не существует'));
 });
 
 module.exports = router;
