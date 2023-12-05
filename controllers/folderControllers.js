@@ -5,6 +5,7 @@ const { IMAGE_PATH } = require("../utils/constants");
 const { generateFolder } = require("../utils/generateFolder");
 const NotFound = require("../errors/NotFound");
 
+// Контоллер создает паку, самостоятельно генирируя ее имя
 const createFolder = (req, res) => {
   const folderName = generateFolder();
   const folderPath = path.join(IMAGE_PATH, folderName);
@@ -12,6 +13,7 @@ const createFolder = (req, res) => {
   res.status(200).json({ message: 'Папка успешно создана', folder: folderName });
 };
 
+// Контроллер удаляет указаную в url папку
 const deleteFolder = (req, res, next) => {
   const { folder } = req.params;
   const folderPath = path.join(IMAGE_PATH, folder);
@@ -31,6 +33,7 @@ const deleteFolder = (req, res, next) => {
     .catch(next);
 };
 
+// Контроллер возвращает массив наменований имеющихся папок
 const getAllFolders = (req, res, next) => {
   fs.promises.readdir(IMAGE_PATH, { withFileTypes: true })
     .then(files => {

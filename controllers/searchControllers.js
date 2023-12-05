@@ -6,6 +6,7 @@ const { imageUrl } = require("../utils/imageUtils");
 const { findByName } = require("../utils/searchUtils");
 const NotFound = require("../errors/NotFound");
 
+// Контроллер осуществляет поиск по передоваемому значению файл в указанной папке
 const searchImages = (req, res, next) => {
   const { folder } = req.params;
   const folderPath = path.join(IMAGE_PATH, folder);

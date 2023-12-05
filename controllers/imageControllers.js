@@ -6,6 +6,7 @@ const { imageUrl, maxSize } = require("../utils/imageUtils");
 const BadRequest = require("../errors/BadRequest");
 const NotFound = require("../errors/NotFound");
 
+// Контроллер загрузки файла на сервер в указанную в url папку
 const uploadImage = (req, res, next) => {
   const { folder } = req.params;
 
@@ -42,6 +43,7 @@ const uploadImage = (req, res, next) => {
   });
 };
 
+// Контроллер возращает указанный в url файл
 const getImage = (req, res) => {
   const { folder, filename } = req.params;
   const parentDir = path.dirname(__dirname);
@@ -61,6 +63,7 @@ const getImage = (req, res) => {
   }
 };
 
+// Контроллер удаляет указанный в url файл из папки
 const deleteImage = (req, res) => {
   const { folder, filename } = req.params;
   const imagePath = path.join(IMAGE_PATH, folder, filename);
@@ -73,6 +76,7 @@ const deleteImage = (req, res) => {
   }
 };
 
+// Контроллер возвращает массив данных о всех файлах хранящихся в указанной в url папке
 const getAllImageUrls = (req, res, next) => {
   const { folder } = req.params;
   const folderPath = path.join(IMAGE_PATH, folder);
