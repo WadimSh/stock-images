@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const Unauthorized = require("../errors/Unauthorized");
+const Forbidden = require("../errors/Forbidden");
 const { SECRET_KEY, ROLE } = process.env;
 
 // Модуль авторизации
@@ -18,7 +19,7 @@ module.exports = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, SECRET_KEY);
     if (decoded.role !== ROLE) {
-      return res.status(403).json({ message: 'Forbidden' });
+      throw new Forbidden('Не достаточно прав для использования данной функции');
     }
     next();
     return true;
