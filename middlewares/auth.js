@@ -1,7 +1,9 @@
-const Unauthorized = require("../errors/Unauthorized");
-const { TOKEN_SECRET } = process.env;
+const jwt = require('jsonwebtoken');
 
-// Временное решение по разграничению прав, дальше будет дорабатываться
+const Unauthorized = require("../errors/Unauthorized");
+const { SECRET_KEY, ROLE } = process.env;
+
+// Модуль авторизации
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
 
@@ -9,12 +11,18 @@ module.exports = (req, res, next) => {
     next(new Unauthorized('Недействительная авторизация'));
     return;
   }
-
+  //c4cbbc48eee69525238ce432094bab4eaab253abd78cac18268da5a83bf2c435
+  //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzAxODQ2MzI3fQ.fIzz3EBebFMYMxK5PvUzirzRw8P80mGfPB9XD4qgWDQ
   const token = authorization.replace('Bearer ', '');
-  if (token === TOKEN_SECRET) {
+
+  try {
+    const decoded = jwt.verify(token, SECRET_KEY);
+    if (decoded.role !== ROLE) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
     next();
-  } else {
+    return true;
+  } catch (err) {
     next(new Unauthorized('Недействительная авторизация'));
-    return;
   }
 };
