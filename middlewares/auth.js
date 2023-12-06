@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
     next(new Unauthorized('Недействительная авторизация'));
     return;
   }
-  //c4cbbc48eee69525238ce432094bab4eaab253abd78cac18268da5a83bf2c435
+  //superadmin = c4cbbc48eee69525238ce432094bab4eaab253abd78cac18268da5a83bf2c435
   //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzAxODQ2MzI3fQ.fIzz3EBebFMYMxK5PvUzirzRw8P80mGfPB9XD4qgWDQ
   const token = authorization.replace('Bearer ', '');
 
