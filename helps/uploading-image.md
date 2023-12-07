@@ -2,7 +2,8 @@
   <img src="./WERSTACK.png" alt="WERSTACK-PLATFORM">
 </p>
 
-[< Назад](../README.md){:style="font-size: small;"}
+<font size="2"><a href="../README.md">< Назад</a></font>
+
 ---
 
 # Загрузка изображения
