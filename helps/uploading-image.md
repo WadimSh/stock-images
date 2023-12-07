@@ -1,4 +1,9 @@
+<p align="center">
+  <img src="./helps/WERSTACK.png" alt="WERSTACK-PLATFORM">
+</p>
+
 [< Назад][1]
+---
 
 # Загрузка изображения
 
@@ -34,6 +39,9 @@
 ```
 
 ---
-###### @ 2023, made with ❤ for WERSTACK.COM
+
+<p align="center">
+  <font color="#999999"><small>@ 2023, made with ❤ for WERSTACK.COM</small></font>
+</p>
 
 [1]:/README.md

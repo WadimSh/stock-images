@@ -2,6 +2,8 @@
   <img src="./helps/WERSTACK.png" alt="WERSTACK-PLATFORM">
 </p>
 
+---
+
 # stock.werstack
 
 stock.werstack - это серверное приложение, разработанное на основе платформы Node.js и фреймворка Express.js. Оно предназначено для хранения и управления файлами с изображениями, используемыми на сайтах, созданных на платформе WerStack.
