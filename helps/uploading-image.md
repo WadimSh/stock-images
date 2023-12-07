@@ -2,7 +2,7 @@
   <img src="./WERSTACK.png" alt="WERSTACK-PLATFORM">
 </p>
 
-[< Назад][1]{:style="font-size: small;"}
+[< Назад](../README.md){:style="font-size: small;"}
 ---
 
 # Загрузка изображения
@@ -43,5 +43,3 @@
 <p align="center">
   <font color="#999999"><small>@ 2023, made with ❤ for WERSTACK.COM</small></font>
 </p>
-
-[1]:/README.md
