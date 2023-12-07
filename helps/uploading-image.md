@@ -42,5 +42,5 @@
 ---
 
 <p align="center">
-  <font size="2" color="#D5D5D5"><small>@ 2023, made with ❤ for WERSTACK.COM</small></font>
+  <font size="2" color="#999999"><small>@ 2023, made with ❤ for WERSTACK.COM</small></font>
 </p>
