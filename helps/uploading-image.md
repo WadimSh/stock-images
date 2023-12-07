@@ -2,11 +2,11 @@
   <img src="./WERSTACK.png" alt="WERSTACK-PLATFORM">
 </p>
 
-<font size="2"><a href="../README.md">< Назад</a></font>
-
 ---
 
-# Загрузка изображения
+<font size="2"><a href="../README.md">< Назад</a></font>
+
+# Загрузка изображения в папку
 
 Запрос отправляет файл изображения и возвращает ссылку на него на сервере. Сервер принимает файлы размером до **1Mb** с расширениями ```.jpg```, ```.jpeg``` и ```.png```.
 
@@ -42,5 +42,5 @@
 ---
 
 <p align="center">
-  <font color="#999999"><small>@ 2023, made with ❤ for WERSTACK.COM</small></font>
+  <font size="2" color="#999999"><small>@ 2023, made with ❤ for WERSTACK.COM</small></font>
 </p>

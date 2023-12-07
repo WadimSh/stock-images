@@ -1,4 +1,10 @@
-[< Назад][1]
+<p align="center">
+  <img src="./WERSTACK.png" alt="WERSTACK-PLATFORM">
+</p>
+
+---
+
+<font size="2"><a href="../README.md">< Назад</a></font>
 
 # Возврат файла по ссылке
 
@@ -18,8 +24,8 @@
  ```javascript
 (binary)
 ```
-
 ---
-###### @ 2023, made with ❤ for WERSTACK.COM
 
-[1]:/README.md
+<p align="center">
+  <font size="2" color="#999999"><small>@ 2023, made with ❤ for WERSTACK.COM</small></font>
+</p>
