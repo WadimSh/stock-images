@@ -33,7 +33,8 @@ API предоставляет роуты для загрузки, получе�
 | [/folders](/helps/returns-array-folders.md) | GET | Возвращает массив имен всех созданных папок на сервере |
 | [/folders/:folder](/helps/deletes-folder.md) | DELETE | Удаляет с сервера папку ```:folder``` со всем ее содержимым |
 
-
-
 ---
-###### @ 2023, made with ❤ for WERSTACK.COM
+
+<p align="center">
+  <font color="#999999"><small>@ 2023, made with ❤ for WERSTACK.COM</small></font>
+</p>
