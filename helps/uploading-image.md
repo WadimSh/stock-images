@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="./helps/WERSTACK.png" alt="WERSTACK-PLATFORM">
+  <img src="./WERSTACK.png" alt="WERSTACK-PLATFORM">
 </p>
 
-[< Назад][1]
+[< Назад][1]{:style="font-size: small;"}
 ---
 
 # Загрузка изображения
