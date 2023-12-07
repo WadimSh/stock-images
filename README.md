@@ -1,4 +1,6 @@
-![WERSTACK](/helps/WERSTACK.png)
+<p align="center">
+  <img src="./helps/WERSTACK.png" alt="WERSTACK-PLATFORM">
+</p>
 
 # stock.werstack
 
