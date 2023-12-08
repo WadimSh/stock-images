@@ -31,7 +31,7 @@ const searchImages = (req, res, next) => {
       }
     })
     .then((searchFiles) => {
-      res.status(200).json({ searchFiles });
+      res.status(200).json(searchFiles);
     })
     .catch(next);
 };

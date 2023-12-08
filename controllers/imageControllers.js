@@ -94,7 +94,7 @@ const getAllImageUrls = (req, res, next) => {
       return Promise.all(imageInfoPromises);
     })
     .then(imageInfos => {
-      res.status(200).json({ imageInfos });
+      res.status(200).json(imageInfos);
     })
     .catch((err) => {
       throw new NotFound('Не удалось получить url');
