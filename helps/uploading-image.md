@@ -14,28 +14,32 @@
 
  + HTTP Method: POST
  
- + URL: https://stock.werstack.com/images/test
+ + URL: https://stock.werstack.com/images/c41562be-5668-4b0f-88a0-d7b1eafb146d
 
  + Headers: 
  ```javascript
- Content-Type: multipart/form-data
+
+  Content-Type: multipart/form-data
+
  ```
 
  + Body:
 ```javascript
-{
-  "image": (binary)
-}
+  {
+    "image": (binary)
+  }
 ```
 
 ### Response
 
- + Status: 200 OK
+ + Status: 200
 
  + Body:
  ```javascript
 {
-  "url": "https://stock.werstack.com/images/test/93e4e139-373a-4870-8780-98094844b59b-2.jpg"
+  "url": "http://localhost:3000/images/c41562be-5668-4b0f-88a0-d7b1eafb146d/veselaya.jpg",
+  "size": 170155,
+  "name": "veselaya.jpg"
 }
 ```
 

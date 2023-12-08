@@ -8,21 +8,31 @@
 
 # Возврат файла по ссылке
 
-Запрос возвращает указанный в запросе файл из определенной папки
+Запрос возвращает указанный в файл из определенной в url папки
 
 ### Request
 
  + HTTP Method: GET
  
- + URL: https://stock.werstack.com/images/test/93e4e139-373a-4870-8780-98094844b59b-2.jpg
+ + URL: https://stock.werstack.com/images/c41562be-5668-4b0f-88a0-d7b1eafb146d/zateya.jpg
 
 ### Response
 
- + Status: 200 OK
+ + Status: 200
+
+ + Headers: 
+ ```javascript
+
+  Content-Length: 132057,
+  Content-Disposition: inline; zateya.jpg,
+
+ ```
 
  + Body:
  ```javascript
-(binary)
+
+  (binary)
+
 ```
 ---
 

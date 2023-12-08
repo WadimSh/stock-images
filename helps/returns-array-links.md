@@ -8,18 +8,29 @@
 
 # Возврат массива ссылок на файлы хранящиеся в папке
 
-Запрос 
+Запрос возвращает массив данных о всех файлах хранящихся в указанной в url папке
 
 ### Request
 
- + HTTP Method: POST
+ + HTTP Method: GET
  
- + URL: https://stock.werstack.com/images/test
+ + URL: https://stock.werstack.com/images/c41562be-5668-4b0f-88a0-d7b1eafb146d
 
  + Body:
 ```javascript
 {
-  "image": (binary)
+  "imageInfos": [
+    {
+      url: https://stock.werstack.com/images/c41562be-5668-4b0f-88a0-d7b1eafb146d/belyaev.jpg,
+      size: 94502,
+      name: belyaev.jpg,
+    },
+    {
+      url: https://stock.werstack.com/images/c41562be-5668-4b0f-88a0-d7b1eafb146d/zateya.jpg,
+      size: 10573,
+      name: zateya.jpg,
+    },
+  ]
 }
 ```
 
