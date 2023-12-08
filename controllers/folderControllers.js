@@ -10,7 +10,7 @@ const createFolder = (req, res) => {
   const folderName = generateFolder();
   const folderPath = path.join(IMAGE_PATH, folderName);
   fs.mkdirSync(folderPath);
-  res.status(200).json({ message: 'Папка успешно создана', folder: folderName });
+  res.status(200).json({ folderName });
 };
 
 // Контроллер удаляет указаную в url папку
@@ -40,7 +40,7 @@ const getAllFolders = (req, res, next) => {
       const folders = files
         .filter(file => file.isDirectory())
         .map(file => file.name);
-      res.status(200).json({ folders });
+      res.status(200).json(folders);
     })
     .catch((err) => {
       throw new NotFound('Не удалось получить папки');

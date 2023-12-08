@@ -15,28 +15,36 @@
  + HTTP Method: GET
  
  + URL: https://stock.werstack.com/search/c41562be-5668-4b0f-88a0-d7b1eafb146d?files=ya
+ 
 
 ### Response
 
- + Status: 200 OK
+ + Status: 200
+
+ + Headers: 
+ ```javascript
+
+  Content-Type: application/json
+
+ ```
 
  + Body:
-```javascript
+ ```javascript
 
-[
-  {
-    url: https://stock.werstack.com/images/c41562be-5668-4b0f-88a0-d7b1eafb146d/belyaev.jpg,
-    size: 94502,
-    name: belyaev.jpg,
-  },
-  {
-    url: https://stock.werstack.com/images/c41562be-5668-4b0f-88a0-d7b1eafb146d/zateya.jpg,
-    size: 10573,
-    name: zateya.jpg,
-  },
-]
+ [
+   {
+     url: https://stock.werstack.com/images/c41562be-5668-4b0f-88a0-d7b1eafb146d/belyaev.jpg,
+     size: 94502,
+     name: belyaev.jpg,
+   },
+   {
+     url: https://stock.werstack.com/images/c41562be-5668-4b0f-88a0-d7b1eafb146d/zateya.jpg,
+     size: 10573,
+     name: zateya.jpg,
+   },
+ ]
 
-```
+ ```
 
 ---
 

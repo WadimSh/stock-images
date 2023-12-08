@@ -34,6 +34,13 @@
 
  + Status: 200
 
+ + Headers: 
+ ```javascript
+
+  Content-Type: application/json
+
+ ```
+
  + Body:
  ```javascript
 {

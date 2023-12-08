@@ -20,6 +20,13 @@
 
  + Status: 200
 
+ + Headers: 
+ ```javascript
+
+  Content-Type: application/json
+
+ ```
+
  + Body:
  ```javascript
 
@@ -27,7 +34,7 @@
     message: 'Файл belyaev.jpg успешно удален' 
   }
 
-```
+ ```
 ---
 
 <p align="center">
